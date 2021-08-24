@@ -1,6 +1,8 @@
 <template>
   <div class="w-full">
-    Header Default
+    <div class="lg:container mx-4">
+      <pre v-highlightjs><code class="sql">Sequelian</code></pre>
+    </div>
   </div>
 </template>
 

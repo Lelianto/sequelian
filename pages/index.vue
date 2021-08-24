@@ -1,5 +1,5 @@
 <template>
-  <div class="md:container mx-auto">
+  <div class="md:container mx-4">
     <div class="w-full flex">
       <div class="w-full lg:w-3/4">
         Input
