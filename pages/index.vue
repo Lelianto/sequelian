@@ -1,11 +1,11 @@
 <template>
-  <div class="md:container mx-4">
-    <div class="w-full flex">
+  <div class="md:container mx-4 pt-3">
+    <div class="w-full flex gap-4">
       <div class="w-full lg:w-3/4">
-        Input
+        <card card="left" />
       </div>
       <div class="w-full lg:w-1/4">
-        Copy of Input
+        <card card="right" />
       </div>
     </div>
   </div>
@@ -13,6 +13,9 @@
 
 <script>
 export default {
-  name: 'MainPage'
+  name: 'MainPage',
+  components: {
+    Card: () => import('@/components/Card/Card.vue')
+  }
 }
 </script>

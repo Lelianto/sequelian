@@ -1,7 +1,9 @@
 <template>
   <div class="w-full">
     <header-nav />
-    <Nuxt />
+    <div class="pt-12">
+      <Nuxt />
+    </div>
   </div>
 </template>
 
