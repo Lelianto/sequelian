@@ -12,10 +12,14 @@
     "test": "jest"
   },
   "dependencies": {
+    "@nuxt/content": "^1.14.0",
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/pwa": "^3.3.5",
     "core-js": "^3.15.1",
-    "nuxt": "^2.15.7"
+    "element-ui": "^2.15.5",
+    "highlight.js": "^11.2.0",
+    "nuxt": "^2.15.7",
+    "vue-highlight.js": "^3.1.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.14.7",
