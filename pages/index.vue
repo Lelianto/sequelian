@@ -80,7 +80,7 @@
         />
       </div>
     </div>
-    <div class="w-full mt-5 max-w-full overflow-x-scroll">
+    <div class="w-full mt-5 max-w-full scroll-item">
       <el-table
         :data="pagedTableData"
         border

@@ -22,6 +22,9 @@ pre code.hljs {
 }
 
 @media only screen and (max-width:768px) {
+  .scroll-item {
+    overflow-x: scroll;
+  }
   .custom-pagination {
     position: absolute;
     left: 0;

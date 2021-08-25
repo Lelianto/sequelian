@@ -1,5 +1,5 @@
 <template>
-  <div class="p-3 lg:container lg:mx-4 border rounded">
+  <div class="p-3 lg:container mx-4 border rounded">
     <div class="mt-0 lg:my-5 text-lg font-bold">
       SQL Statement
     </div>
