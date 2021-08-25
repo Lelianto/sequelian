@@ -1,7 +1,9 @@
 <template>
-  <div class="w-full">
+  <div class="lg:container mx-4">
     <header-nav />
-    <Nuxt />
+    <div class="pt-12">
+      <Nuxt />
+    </div>
   </div>
 </template>
 
