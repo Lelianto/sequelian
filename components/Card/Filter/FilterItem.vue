@@ -10,9 +10,9 @@
         </el-button>
       </el-button-group>
     </div>
-    <div class="flex gap-2 border rounded p-3">
+    <div class="flex flex-col md:flex-row gap-2 border rounded p-3">
       <div>
-        <div class="text-xs text-gray-500">
+        <div class="text-xs text-gray-500 mb-1">
           Column
         </div>
         <el-select
@@ -30,7 +30,7 @@
         </el-select>
       </div>
       <div>
-        <div class="text-xs text-gray-500">
+        <div class="text-xs text-gray-500 mb-1">
           Condition
         </div>
         <el-select
@@ -48,7 +48,7 @@
         </el-select>
       </div>
       <div>
-        <div class="text-xs text-gray-500">
+        <div class="text-xs text-gray-500 mb-1">
           Value
         </div>
         <div class="flex gap-2">
