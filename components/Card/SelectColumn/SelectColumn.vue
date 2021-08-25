@@ -1,6 +1,7 @@
 <template>
   <div class="w-full">
     <el-select
+      id="select-column"
       v-model="selectedColumnLocal"
       class="w-full"
       multiple

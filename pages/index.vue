@@ -16,14 +16,16 @@
             </div>
             <hr class="my-5">
             <div class="w-full">
-              <div class="mb-2 flex justify-between">
-                <div class="relative my-auto text-sm lg:text-base">
-                  Total Columns ({{ tableColumns.length }})
+              <label for="select-column">
+                <div class="mb-2 flex justify-between">
+                  <div class="relative my-auto text-sm lg:text-base">
+                    Total Columns ({{ tableColumns.length }})
+                  </div>
+                  <el-button class="custom-button" @click="selectAllColumns">
+                    Select All Columns
+                  </el-button>
                 </div>
-                <el-button class="custom-button" @click="selectAllColumns">
-                  Select All Columns
-                </el-button>
-              </div>
+              </label>
               <select-column
                 :columns="tableColumns"
                 :selected-columns="selectedColumns"
