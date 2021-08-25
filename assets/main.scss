@@ -20,3 +20,14 @@ pre code.hljs {
 .break-space {
   white-space: break-spaces !important;
 }
+
+@media only screen and (max-width:768px) {
+  .custom-pagination {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    max-width: 100%;
+    overflow-x: scroll;
+  }
+}

@@ -1,10 +1,17 @@
 <template>
-  <div class="lg:container mx-4 border rounded">
-    <div class="subtitle-1 my-5 text-uppercase text-lg font-bold">
+  <div class="p-3 lg:container lg:mx-4 border rounded">
+    <div class="mt-0 lg:my-5 text-lg font-bold">
       SQL Statement
     </div>
     <hr v-if="selectedTable" class="w-full my-5">
-    <pre v-if="selectedTable"><code ref="codeInput" v-highlight class="sql break-space" />{{ contentText() }}</pre>
+    <pre v-if="selectedTable" class="bg-yellow-100 p-3 rounded"><code ref="codeInput" v-highlight class="sql break-space" />{{ contentText() }}</pre>
+    <hr v-if="selectedTable" class="w-full my-5">
+    <div class="my-5 text-md">
+      Click on any of the queries below to see it in action.
+    </div>
+    <div v-if="queries.length">
+      <pre v-for="(queryText, index) in queries" :key="'query-'+index" class="bg-yellow-100 p-3 rounded my-3 cursor-pointer" @click="setQuery(index)"><code v-highlight class="sql break-space" />{{ queryText.text }}</pre>
+    </div>
   </div>
 </template>
 
@@ -37,6 +44,12 @@ export default {
     queryLimit: {
       type: Number,
       default: 1
+    },
+    queries: {
+      type: Array,
+      default () {
+        return []
+      }
     }
   },
   data () {
@@ -60,6 +73,9 @@ export default {
     }
   },
   methods: {
+    setQuery (index) {
+      this.$emit('setQuery', index)
+    },
     contentText () {
       const selectStatement =
           (this.selectedColumns.length === this.columns.length

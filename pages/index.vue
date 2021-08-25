@@ -1,11 +1,11 @@
 <template>
-  <div class="md:container mx-4 pt-3">
-    <div class="w-full md:flex gap-4">
-      <div class="w-full md:w-3/4">
-        <div class="md:container mx-4 border rounded py-4 flex gap-4">
+  <div class="pt-3">
+    <div class="w-full lg:flex gap-4">
+      <div class="w-full lg:w-3/4">
+        <div class="lg:container border rounded p-3 lg:py-4 lg:flex lg:gap-4">
           <div class="w-full lg:w-1/2">
             <div class="w-full">
-              <div class="mb-2">
+              <div class="mb-2 text-sm lg:text-base">
                 Select From Table
               </div>
               <select-table
@@ -17,8 +17,8 @@
             <hr class="my-5">
             <div class="w-full">
               <div class="mb-2 flex justify-between">
-                <div class="relative my-auto">
-                  Total Columns (0)
+                <div class="relative my-auto text-sm lg:text-base">
+                  Total Columns ({{ tableColumns.length }})
                 </div>
                 <el-button class="custom-button" @click="selectAllColumns">
                   Select All Columns
@@ -33,8 +33,8 @@
           </div>
           <div class="w-full relative lg:w-1/2">
             <div class="w-full">
-              <div class="mb-2 flex justify-between">
-                <div class="relative my-auto">
+              <div class="mb-2 mt-3 lg:mt-0 flex justify-between">
+                <div class="relative my-auto text-sm lg:text-base">
                   Filter
                 </div>
                 <el-button
@@ -58,29 +58,33 @@
                   />
                 </div>
               </div>
-              <div class="mt-3" :class="{'absolute bottom-0 w-full' : !selectedFilters.length }">
-                <div>Limit</div>
+              <div class="mt-3" :class="{'lg:absolute bottom-0 w-full' : !selectedFilters.length }">
+                <div class="text-sm lg:text-base">
+                  Limit
+                </div>
                 <el-input v-model="queryLimit" class="w-full mt-2" placeholder="Input your query limit" />
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="w-full md:w-1/4 mt-3 md:mt-0">
+      <div class="w-full lg:w-1/4 mt-3 lg:mt-0">
         <right-card
           :columns="tableColumns"
           :selected-columns="selectedColumns"
           :selected-table="selectedTable"
           :selected-filters="selectedFilters"
           :query-limit="queryLimit*1"
+          :queries="queries"
+          @setQuery="setQuery"
         />
       </div>
     </div>
-    <div class="w-full mt-5">
+    <div class="w-full mt-5 max-w-full overflow-x-scroll">
       <el-table
         :data="pagedTableData"
         border
-        style="width: 100%"
+        class="w-full"
       >
         <el-table-column
           v-for="(head, index) in tableHeaders"
@@ -92,6 +96,7 @@
       <div v-if="tableItems.length" class="w-full flex justify-center my-3">
         <el-pagination
           layout="prev, pager, next"
+          class="custom-pagination"
           :total="tableItems.length"
           @current-change="setPage"
         />
@@ -231,7 +236,7 @@ export default {
       this.$set(this.selectedFilters, index, newValue)
     },
     setQuery (query) {
-      if (query === 1) {
+      if (query === 0) {
         this.setTable('products')
         this.$nextTick(() => {
           this.$nuxt.$loading.start()

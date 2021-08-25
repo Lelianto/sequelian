@@ -12,14 +12,14 @@ export default {
       default: ''
     }
   },
-  data: () => {
-    return {
-      selectedTableLocal: ''
-    }
-  },
-  watch: {
-    selectedTableLocal (table) {
-      this.$emit('select', table)
+  computed: {
+    selectedTableLocal: {
+      get () {
+        return this.selectedTable
+      },
+      set (table) {
+        this.$emit('select', table)
+      }
     }
   }
 }
