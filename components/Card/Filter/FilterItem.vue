@@ -51,7 +51,10 @@
         <div class="text-xs text-gray-500">
           Value
         </div>
-        <el-input v-model="localFilter.input1" placeholder="Input a Value" />
+        <div class="flex gap-2">
+          <el-input v-model="localFilter.input1" placeholder="Input a Value" />
+          <el-input v-if="localFilter.filter === 'between'" v-model="localFilter.input2" placeholder="Input a Value" />
+        </div>
       </div>
       <div class="flex">
         <el-button class="custom-danger" type="danger" icon="el-icon-delete" circle @click="removeFilter(localFilter.index)" />

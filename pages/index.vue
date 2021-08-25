@@ -63,7 +63,13 @@
         </div>
       </div>
       <div class="w-full md:w-1/4 mt-3 md:mt-0">
-        <right-card card="right" />
+        <right-card
+          :columns="tableColumns"
+          :selected-columns="selectedColumns"
+          :selected-table="selectedTable"
+          :selected-filters="selectedFilters"
+          :query-limit="queryLimit"
+        />
       </div>
     </div>
     <div class="w-full mt-5">
@@ -219,6 +225,29 @@ export default {
       const newValue = this.selectedFilters.find(item => item.index === index)
       newValue[key] = value
       this.$set(this.selectedFilters, index, newValue)
+    },
+    setQuery (query) {
+      if (query === 1) {
+        this.setTable('products')
+        this.$nextTick(() => {
+          this.$nuxt.$loading.start()
+
+          setTimeout(() => {
+            this.selectAllColumns()
+            this.$nuxt.$loading.finish()
+          }, 500)
+        })
+      } else {
+        this.setTable('customers')
+        this.$nextTick(() => {
+          this.$nuxt.$loading.start()
+
+          setTimeout(() => {
+            this.selectAllColumns()
+            this.$nuxt.$loading.finish()
+          }, 500)
+        })
+      }
     }
   }
 }
