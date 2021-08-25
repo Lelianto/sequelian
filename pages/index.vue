@@ -2,11 +2,6 @@
   <div class="md:container mx-4 pt-3">
     <div class="w-full md:flex gap-4">
       <div class="w-full md:w-3/4">
-        <!-- <left-card
-          :tables="csvTables"
-          :selected-table="selectedTable"
-          @select="setTable"
-        /> -->
         <div class="md:container mx-4 border rounded py-4 flex gap-4">
           <div class="w-full lg:w-1/2">
             <div class="w-full">
@@ -71,6 +66,27 @@
         <right-card card="right" />
       </div>
     </div>
+    <div class="w-full mt-5">
+      <el-table
+        :data="pagedTableData"
+        border
+        style="width: 100%"
+      >
+        <el-table-column
+          v-for="(head, index) in tableHeaders"
+          :key="'header-'+index"
+          :prop="head.value"
+          :label="head.text"
+        />
+      </el-table>
+      <div v-if="tableItems.length" class="w-full flex justify-center my-3">
+        <el-pagination
+          layout="prev, pager, next"
+          :total="tableItems.length"
+          @current-change="setPage"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -94,15 +110,67 @@ export default {
       selectedColumns: [],
       selectedFilters: [],
       tableColumns: [],
-      filterIndex: 0
+      filterIndex: 0,
+      queryLimit: 10,
+      page: 1,
+      pageSize: 10,
+      queries: [
+        {
+          id: 1,
+          text: 'SELECT * FROM products'
+        },
+        {
+          id: 2,
+          text: 'SELECT * FROM customers'
+        }
+      ]
+    }
+  },
+  computed: {
+    tableItems () {
+      return this.columnsData.body && this.columnsData.body.length
+        ? this.columnsData.body
+        : []
+    },
+    tableHeaders () {
+      const columns = this.selectedColumns.length
+        ? this.selectedColumns
+        : this.tableColumns
+      return columns.map((item) => {
+        return {
+          text: item.toUpperCase(),
+          value: item
+        }
+      })
+    },
+    pagedTableData () {
+      return this.tableItems.slice(this.pageSize * this.page - this.pageSize, this.pageSize * this.page)
     }
   },
   watch: {
+    selectedTable () {
+      this.columnsData = []
+      this.selectedColumns = []
+      this.selectedFilters = []
+      this.tableColumns = []
+      this.filterIndex = 0
+      this.queryLimit = 10
+      this.page = 1
+      this.pageSize = 10
+    },
     columnsData (newTable, oldTable) {
       this.tableColumns =
         this.columnsData.body && this.columnsData.body.length
           ? Object.keys(this.columnsData.body[0])
           : []
+    },
+    selectedColumns (next, prev) {
+      if (prev.length > next.length) {
+        const difference = prev.filter(x => !next.includes(x))
+        this.selectedFilters = this.selectedFilters.filter(
+          filter => filter.column !== difference[0]
+        )
+      }
     }
   },
   methods: {
@@ -111,6 +179,9 @@ export default {
       this.columnsData = await this.$content('csv', this.selectedTable)
         .only(['body'])
         .fetch()
+    },
+    setPage (val) {
+      this.page = val
     },
     setColumns (columns) {
       this.selectedColumns = [...columns]
