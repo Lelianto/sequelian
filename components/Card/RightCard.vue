@@ -1,10 +1,10 @@
 <template>
   <div class="lg:container mx-4 border rounded">
-    <span class="subtitle-1 my-5 text-uppercase">SQL Statement</span>
-    <hr v-if="selectedTable" class="w-full mt-5">
-    <pre v-if="selectedTable">
-      <code v-highlight class="sql break-space" v-html="contentText()" />
-    </pre>
+    <div class="subtitle-1 my-5 text-uppercase text-lg font-bold">
+      SQL Statement
+    </div>
+    <hr v-if="selectedTable" class="w-full my-5">
+    <pre v-if="selectedTable"><code ref="codeInput" v-highlight class="sql break-space" />{{ contentText() }}</pre>
   </div>
 </template>
 
@@ -94,9 +94,13 @@ export default {
             return statement
           }
         )
-        return `<div>${selectStatement + '\nWHERE ' + conditionsStatement.join('\n') + `\nlimit ${this.queryLimit}`}</div>`
+        this.$refs.codeInput.innerHTML = `${selectStatement + '\nWHERE ' + conditionsStatement.join('\n') + `\nlimit ${this.queryLimit}`}`
+        return ''
       } else {
-        return `<div>${selectStatement + `\nlimit ${this.queryLimit}`}</div>`
+        if (this.$refs.codeInput) {
+          this.$refs.codeInput.innerHTML = `${selectStatement + `\nlimit ${this.queryLimit}`}`
+        }
+        return ''
       }
     }
   }

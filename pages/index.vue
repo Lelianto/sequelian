@@ -31,7 +31,7 @@
               />
             </div>
           </div>
-          <div class="w-full lg:w-1/2">
+          <div class="w-full relative lg:w-1/2">
             <div class="w-full">
               <div class="mb-2 flex justify-between">
                 <div class="relative my-auto">
@@ -58,6 +58,10 @@
                   />
                 </div>
               </div>
+              <div class="mt-3" :class="{'absolute bottom-0 w-full' : !selectedFilters.length }">
+                <div>Limit</div>
+                <el-input v-model="queryLimit" class="w-full mt-2" placeholder="Input your query limit" />
+              </div>
             </div>
           </div>
         </div>
@@ -68,7 +72,7 @@
           :selected-columns="selectedColumns"
           :selected-table="selectedTable"
           :selected-filters="selectedFilters"
-          :query-limit="queryLimit"
+          :query-limit="queryLimit*1"
         />
       </div>
     </div>
