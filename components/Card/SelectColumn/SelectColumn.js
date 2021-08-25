@@ -7,20 +7,21 @@ export default {
         return []
       }
     },
-    selectedColumn: {
-      type: String,
-      default: ''
+    selectedColumns: {
+      type: Array,
+      default: () => {
+        return []
+      }
     }
   },
-  data: () => {
-    return {
-      selectedColumnLocal: ''
-    }
-  },
-  watch: {
-    selectedColumnLocal (columns) {
-      console.log('column ->', columns)
-      this.$emit('update-columns', columns)
+  computed: {
+    selectedColumnLocal: {
+      get () {
+        return this.selectedColumns
+      },
+      set (columns) {
+        this.$emit('update-columns', columns)
+      }
     }
   }
 }

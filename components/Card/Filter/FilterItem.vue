@@ -121,7 +121,6 @@ export default {
       this.$emit('clearFilter', index)
     },
     removeFilter (index) {
-      console.log('index ->', index)
       this.$emit('removeFilter', index)
     },
     columnFilters (col) {
