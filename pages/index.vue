@@ -18,7 +18,7 @@
             <div class="w-full">
               <div class="mb-2 flex justify-between">
                 <div class="relative my-auto text-sm lg:text-base">
-                  <label for="select-column">
+                  <label id="column-title" for="select-column">
                     Total Columns ({{ tableColumns.length }})
                   </label>
                 </div>
@@ -78,6 +78,7 @@
           :selected-filters="selectedFilters"
           :query-limit="queryLimit*1"
           :queries="queries"
+          :env="env"
           @setQuery="setQuery"
         />
       </div>
@@ -114,7 +115,7 @@ export default {
     SelectTable: () => import('@/components/Card/SelectTable/SelectTable.vue'),
     SelectColumn: () => import('@/components/Card/SelectColumn/SelectColumn.vue'),
     FilterItem: () => import('@/components/Card/Filter/FilterItem.vue'),
-    RightCard: () => import('@/components/Card/RightCard.vue')
+    RightCard: () => import('@/components/Card/RightCard/RightCard.vue')
   },
   async asyncData ({ $content }) {
     const csvTables = await $content('csv').only(['slug']).fetch()
@@ -131,6 +132,7 @@ export default {
       queryLimit: 10,
       page: 1,
       pageSize: 10,
+      env: 'prod',
       queries: [
         {
           id: 1,

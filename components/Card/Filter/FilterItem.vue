@@ -2,10 +2,10 @@
   <div class="w-full">
     <div v-if="index !== 0" class="flex justify-center my-2">
       <el-button-group>
-        <el-button class="and-or-button" :type="localFilter.andOrOr==='and'? 'primary':''" @click="queryLogic('and')">
+        <el-button id="button-and" class="and-or-button" :type="localFilter.andOrOr==='and'? 'primary':''" @click="queryLogic('and')">
           AND
         </el-button>
-        <el-button class="and-or-button" :type="localFilter.andOrOr==='or'? 'primary':''" @click="queryLogic('or')">
+        <el-button id="button-or" class="and-or-button" :type="localFilter.andOrOr==='or'? 'primary':''" @click="queryLogic('or')">
           OR
         </el-button>
       </el-button-group>
@@ -23,8 +23,8 @@
         >
           <el-option
             v-for="item in selectedColumns"
-            :key="item"
-            :label="item"
+            :key="`${item}`"
+            :label="`${item}`"
             :value="item"
           />
         </el-select>
@@ -41,8 +41,8 @@
         >
           <el-option
             v-for="item in filters"
-            :key="item"
-            :label="item"
+            :key="`${item}`"
+            :label="`${item}`"
             :value="item"
           />
         </el-select>
@@ -63,83 +63,5 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'FilterItem',
-  props: {
-    selectedFilter: {
-      type: Object,
-      default () {
-        return {}
-      }
-    },
-    index: {
-      type: Number,
-      default: 0
-    },
-    selectedColumns: {
-      type: Array,
-      default () {
-        return [
-          {
-            index: 0,
-            column: null,
-            andOrOr: 'and',
-            filter: null,
-            input1: null,
-            input2: null
-          }
-        ]
-      }
-    },
-    columns: {
-      type: Array,
-      default () {
-        return []
-      }
-    }
-  },
-  data: () => {
-    return {
-      filters: [
-        'equal',
-        'not equal',
-        'greater than',
-        'less than',
-        'between',
-        'in'
-      ]
-    }
-  },
-  computed: {
-    localFilter () {
-      return this.selectedFilter
-    }
-  },
-  methods: {
-    queryLogic (logic) {
-      this.$emit('input', this.index, 'andOrOr', logic)
-    },
-    clearFilter (index) {
-      this.$emit('clearFilter', index)
-    },
-    removeFilter (index) {
-      this.$emit('removeFilter', index)
-    },
-    columnFilters (col) {
-      if (col !== null && col !== undefined) {
-        return [
-          'equal',
-          'not equal',
-          'greater than',
-          'less than',
-          'between',
-          'in'
-        ]
-      } else {
-        return []
-      }
-    }
-  }
-}
+<script src="./FilterScript.js">
 </script>

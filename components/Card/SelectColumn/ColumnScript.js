@@ -1,5 +1,5 @@
 export default {
-  name: 'SelectColumns',
+  name: 'SelectColumn',
   props: {
     columns: {
       type: Array,

@@ -19,5 +19,5 @@
   </div>
 </template>
 
-<script src="./SelectColumn.js">
+<script src="./ColumnScript.js">
 </script>

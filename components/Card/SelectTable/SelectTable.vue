@@ -9,4 +9,4 @@
   </el-select>
 </template>
 
-<script src="./SelectTable.js"></script>
+<script src="./TableScript.js"></script>
