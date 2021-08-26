@@ -1,4 +1,8 @@
-# sqlian
+# Sequelian - An online SQL Query generator by Lelianto
+
+An online sql editor made with [nuxt](https://nuxtjs.org/), [element-ui](element.eleme.i), [tailwind](https://tailwindcss.com/docs), [nuxt-content](https://github.com/nuxt/content) and [nuxt-highlight.js](https://www.npmjs.com/package/nuxt-highlightjs) for syntax highlighting.
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/08bb3178-9ef7-49c9-af3b-f8e12766dfe2/deploy-status)](https://app.netlify.com/sites/sequelian/deploys)
 
 ## Build Setup
 
@@ -17,53 +21,43 @@ $ npm run start
 $ npm run generate
 ```
 
-For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
+For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
 
-## Special Directories
+# Page Load Time
 
-You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
+I have tested page load time using lighthouse in google chrome.
+I have done the following things to optimize page performance.
 
-### `assets`
+- We import the code for the components that we are using. We import it dynamically in index.vue page. To avoid making our application worse by actually making it better and adding new features we just need to make separate bundles for each route using dynamic import syntax. Only the code from route that is currently visited by the user will be downloaded.
+- Using the Tailwind CSS we configure it to only download the packages we use. Using tailwind config purgecss to remove unwanted css class.
+- Implement some of Vue best pratices from [vue-school](https://vueschool.io/articles/series/vue-js-performance/).
 
-The assets directory contains your uncompiled assets such as Stylus or Sass files, images, or fonts.
+Below are results for various matrices before and after optimizations.
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/assets).
+### Desktop
 
-### `components`
+| Item                           | Before   | After    |
+| ------------------------------ | -------- | -------- |
+| FCP (First Contentful Paint)   | 324  ms  | 282  ms  |
+| SI (Speed Index)               | 535  ms  | 497  ms  |
+| LCP (Largest Contentful Paint) | 324  ms  | 282  ms  |
+| TTI (Time to Interactive)      | 867  ms  | 837  ms  |
+| TBT (Total Blocking Time)      | 47   ms  | 9    ms  |
+| CLS (Cumulative Layout Shift)  | 0.00 ms  | 0.00 ms  |
 
-The components directory contains your Vue.js components. Components make up the different parts of your page and can be reused and imported into your pages, layouts and even other components.
+Screenshot:
+![lighthouse desktop results](assets/images/LightHouseFinal.png)
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/components).
+### Mobile
 
-### `layouts`
+| Item                           | Value    | After    |
+| ------------------------------ | -------- | -------- |
+| FCP (First Contentful Paint)   | 2,124 ms | 1,324 ms |
+| SI (Speed Index)               | 5,219 ms | 4,172 ms |
+| LCP (Largest Contentful Paint) | 3,044 ms | 1,324 ms |
+| TTI (Time to Interactive)      | 3,569 ms | 4,636 ms |
+| TBT (Total Blocking Time)      | 330   ms | 426   ms |
+| CLS (Cumulative Layout Shift)  | 0.00  ms | 0.02  ms |
 
-Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
-
-
-### `pages`
-
-This directory contains your application views and routes. Nuxt will read all the `*.vue` files inside this directory and setup Vue Router automatically.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/get-started/routing).
-
-### `plugins`
-
-The plugins directory contains JavaScript plugins that you want to run before instantiating the root Vue.js Application. This is the place to add Vue plugins and to inject functions or constants. Every time you need to use `Vue.use()`, you should create a file in `plugins/` and add its path to plugins in `nuxt.config.js`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/plugins).
-
-### `static`
-
-This directory contains your static files. Each file inside this directory is mapped to `/`.
-
-Example: `/static/robots.txt` is mapped as `/robots.txt`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/static).
-
-### `store`
-
-This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
+Screenshot:
+![lighthouse mobile results](assets/images/LightHouseMobileFinal.png)

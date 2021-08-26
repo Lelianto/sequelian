@@ -112,10 +112,10 @@
 export default {
   name: 'MainPage',
   components: {
-    SelectTable: () => import('@/components/Card/SelectTable/SelectTable.vue'),
-    SelectColumn: () => import('@/components/Card/SelectColumn/SelectColumn.vue'),
-    FilterItem: () => import('@/components/Card/Filter/FilterItem.vue'),
-    RightCard: () => import('@/components/Card/RightCard/RightCard.vue')
+    SelectTable: () => import(/* webpackPrefetch: true */ '@/components/Card/SelectTable/SelectTable.vue'),
+    SelectColumn: () => import(/* webpackPrefetch: true */ '@/components/Card/SelectColumn/SelectColumn.vue'),
+    FilterItem: () => import(/* webpackPrefetch: true */ '@/components/Card/Filter/FilterItem.vue'),
+    RightCard: () => import(/* webpackPrefetch: true */ '@/components/Card/RightCard/RightCard.vue')
   },
   async asyncData ({ $content }) {
     const csvTables = await $content('csv').only(['slug']).fetch()
