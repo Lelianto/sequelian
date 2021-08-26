@@ -30,7 +30,7 @@ I have done the following things to optimize page performance.
 
 - We import the code for the components that we are using. We import it dynamically in index.vue page. To avoid making our application worse by actually making it better and adding new features we just need to make separate bundles for each route using dynamic import syntax. Only the code from route that is currently visited by the user will be downloaded.
 - Using the Tailwind CSS we configure it to only download the packages we use. Using tailwind config purgecss to remove unwanted css class.
-- Implement some of Vue best pratices from [vue-school](https://vueschool.io/articles/series/vue-js-performance/).
+- Implement some of Vue best practices from [vue-school](https://vueschool.io/articles/series/vue-js-performance/).
 
 Below are results for various matrices before and after optimizations.
 
