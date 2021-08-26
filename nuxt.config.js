@@ -1,12 +1,14 @@
 export default {
+  target: 'static',
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'sqlian',
+    title: 'sequelian',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { hid: 'description', name: 'description', content: 'Perfect Online SQL Editor' },
+      { name: 'format-detection', content: 'telephone=no' },
+      { name: 'theme-color', media: '(prefers-color-scheme: light)', content: 'white' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -15,10 +17,14 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '@/assets/main.css',
+    '@/assets/main.scss'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    '@/plugins/highlight.js',
+    '@/plugins/element-ui'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -37,7 +43,9 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    '@nuxt/content',
+    'nuxt-highlightjs'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

@@ -1,0 +1,36 @@
+.custom-button {
+  padding: 0px 10px !important;
+}
+.and-or-button {
+  padding: 5px 10px !important;
+  min-width: 50px !important;
+  text-align: center;
+}
+.custom-danger {
+  padding: 5px !important;
+  position: relative !important;
+  margin: auto !important;
+  margin-bottom: 7px !important;
+}
+
+pre code.hljs {
+  padding: 0px !important;
+}
+
+.break-space {
+  white-space: break-spaces !important;
+}
+
+@media only screen and (max-width:768px) {
+  .scroll-item {
+    overflow-x: scroll;
+  }
+  .custom-pagination {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    max-width: 100%;
+    overflow-x: scroll;
+  }
+}
