@@ -1,5 +1,6 @@
 export default {
   target: 'static',
+  ssr: false,
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'sequelian',
@@ -13,6 +14,9 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
+  },
+  generate: {
+    fallback: true
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
